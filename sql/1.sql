@@ -1,0 +1,7 @@
+CREATE TABLE Gastos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fecha DATE DEFAULT CURRENT_DATE,
+    descripcion TEXT NOT NULL,
+    monto DECIMAL(10, 2) NOT NULL,
+    categoria TEXT
+);

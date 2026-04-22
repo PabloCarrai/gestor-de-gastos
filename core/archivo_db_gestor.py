@@ -23,6 +23,9 @@ class GestorArchivoDb:
             return f"Ocurrio un error inesperado: {e}"
 
     def eliminar_archivo_db(self):
+        """
+        Intenta eliminar el archivo, sino existe no hace nada
+        """
         archivo = Path(self.archivo)
         try:
             archivo.unlink()
@@ -32,4 +35,4 @@ class GestorArchivoDb:
         except PermissionError:
             return f"No tienes permisos para borrar el archivo"
         except Exception as e:
-            return f"Ocurrion un error: {e}"
+            return f"Ocurrio un error: {e}"
