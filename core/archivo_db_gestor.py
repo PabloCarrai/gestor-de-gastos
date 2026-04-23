@@ -1,9 +1,11 @@
 from pathlib import Path
+import sqlite3
 
 
 class GestorArchivoDb:
-    def __init__(self, archivo):
+    def __init__(self, archivo, sql):
         self.archivo = archivo
+        self.sql = sql
 
     def crear_archivo_db(self):
         """
@@ -12,11 +14,13 @@ class GestorArchivoDb:
         Si no existe lo crea vacio
         """
 
+        #   Path del archivo .db
         archivo = Path(self.archivo)
         try:
+            #   Reviso si el archivo existe
             if not archivo.exists():
+                #   Sino existe lo creo
                 archivo.touch()
-                return f"Archivo {archivo} Creado"
             else:
                 return f"El archivo ya existe"
         except Exception as e:
@@ -36,3 +40,28 @@ class GestorArchivoDb:
             return f"No tienes permisos para borrar el archivo"
         except Exception as e:
             return f"Ocurrio un error: {e}"
+
+    def leer_sql(self):
+        """
+        Aca agarro el archivo sql, lo abro lo leo y devuelvo
+        su contenido.
+        """
+        with open(self.sql, "r", encoding="utf-8") as archivo:
+            contenido = archivo.read()
+            return contenido
+
+    def correr_sql(self):
+        try:
+            sql = self.leer_sql()
+            conexion = sqlite3.connect(self.archivo)
+            cursor = conexion.cursor()
+            cursor.execute(sql)
+            conexion.commit()
+            #   Si hay algun error aviso
+        except sqlite3.Error as e:
+            return f"Error Sqlite: {e}"
+        finally:
+            #   Si la conexion esta abierta la cerramos
+            if conexion:
+                conexion.close()
+                print("Conexion Cerrada")
