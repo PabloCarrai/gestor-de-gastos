@@ -1,11 +1,13 @@
 from pathlib import Path
 import sqlite3
+from datetime import datetime
 
 
 class GestorArchivoDb:
-    def __init__(self, archivo, sql):
+    def __init__(self, archivo, sql, dump):
         self.archivo = archivo
         self.sql = sql
+        self.dump = dump
 
     def crear_archivo_db(self):
         """
@@ -65,3 +67,13 @@ class GestorArchivoDb:
             if conexion:
                 conexion.close()
                 print("Conexion Cerrada")
+
+    def hacer_dump_db(self):
+        ahora = datetime.now().strftime("%Y-%m-%d_%H-%M")
+        archivo = f"{self.dump}/backup_{ahora}.sql"
+        conexion = sqlite3.connect(self.archivo)
+        with open(archivo, "w") as f:
+            for linea in conexion.iterdump():
+                f.write(f"{linea}\n")
+        conexion.close()
+        print(f"Dump guardado como {self.dump}")

@@ -7,4 +7,5 @@ ruta_db = os.path.join(base_dir, "data", "db_gastos.db")
 
 #   Ruta a 1.sql
 ruta_sql = os.path.join(base_dir, "sql", "1.sql")
-
+#   Destino del dump de la db
+ruta_dump= os.path.join(base_dir, "sql", "dump")
