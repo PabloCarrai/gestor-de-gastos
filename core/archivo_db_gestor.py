@@ -1,5 +1,5 @@
 from pathlib import Path
-import sqlite3
+import sqlite3, os
 from datetime import datetime
 
 
@@ -77,3 +77,41 @@ class GestorArchivoDb:
                 f.write(f"{linea}\n")
         conexion.close()
         print(f"Dump guardado como {self.dump}")
+
+    def obtener_dump_mas_actual(self):
+        #   Objeto Path deldirectorio
+        dir_path = Path(self.dump)
+        #   Busco los *.sql
+        archivos = sorted(dir_path.glob("backup_*.sql"))
+
+        #   Si no hay archivos devuelvo None
+        if archivos:
+            archivo_reciente = archivos[-1].resolve()
+            return str(archivo_reciente)
+
+    def restaurar_dump_mas_nuevo(self):
+        #   Aca restauro el ultimo dump al archivo .db
+        try:
+            #   Necesito boletear la db para que el dump ande
+            if os.path.exists(self.archivo):
+                os.remove(self.archivo)
+            #   Conecto la db
+            conexion = sqlite3.connect(self.archivo)
+            #   Genero un cursor
+            cursor = conexion.cursor()
+            #   Leo el ultimo dump
+            with open(self.obtener_dump_mas_actual(), "r", encoding="utf-8") as f:
+                sql_script = f.read()
+            #   Restauro el mismo
+            cursor.executescript(sql_script)
+            #   Hago efectivo el cambio
+            conexion.commit()
+            print(f"Restaurando {self.obtener_dump_mas_actual()} en db {self.archivo}")
+            #   Si hay algun error aviso
+        except sqlite3.Error as e:
+            return f"Error Sqlite: {e}"
+        finally:
+            #   Si la conexion esta abierta la cerramos
+            if conexion:
+                conexion.close()
+                print("Conexion Cerrada")
