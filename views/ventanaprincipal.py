@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from models.funciones_auxiliares import verificar_vacios
 
 
 class VentanaPrincipal:
@@ -36,8 +37,19 @@ class VentanaPrincipal:
         self.cb_categoria.set("Elija una opcion")
         self.cb_categoria.grid(column=1, row=2, padx=10, pady=10)
 
-        self.btn_agregar = tk.Button(self.lbf_detalles, text="Agregar")
+        self.btn_agregar = tk.Button(
+            self.lbf_detalles, text="Agregar", command=self.agregar
+        )
         self.btn_agregar.grid(column=0, row=4, padx=10, pady=10)
 
-        self.btn_cancelar = tk.Button(self.lbf_detalles, text="Cancelar")
+        self.btn_cancelar = tk.Button(
+            self.lbf_detalles, text="Cancelar", command=self.salir
+        )
         self.btn_cancelar.grid(column=1, row=4, padx=10, pady=10)
+
+    def agregar(self):
+        lista_entradas = [self.txt_descripcion, self.txt_monto]
+        verificar_vacios(lista_entradas)
+
+    def salir(self):
+        self.ventana_principal.destroy()
