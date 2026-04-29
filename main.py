@@ -1,8 +1,12 @@
+import tkinter as tk
+
 #   Importo la ruta de la db, y la ruta del archivo que crea la tabla productos
 from config import ruta_db, ruta_sql, ruta_dump
 
 #   Importo la clase que gestiona la db
 from core.archivo_db_gestor import GestorArchivoDb
+
+from views.ventanaprincipal import VentanaPrincipal
 
 
 def crear_db():
@@ -28,17 +32,17 @@ def hacer_restore_dump():
 
 def eliminar_dump():
     db = GestorArchivoDb(ruta_db, ruta_sql, ruta_dump)
-    return db.obtener_dump_menos_nuevos()
+    return db.eliminar_dump_viejos()
+
+
+def ventana():
+    root = tk.Tk()
+    ventana = VentanaPrincipal(root)
+    root.mainloop()
 
 
 def main():
-    # crear_db()
-    # hacer_dump()
-    # resultado = obtener_dump_mas_nuevo()
-    # print(resultado)
-    pass
-    #print(eliminar_dump())
-    #print(hacer_dump())
+    ventana()
 
 
 if __name__ == "__main__":

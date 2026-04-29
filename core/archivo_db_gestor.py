@@ -79,11 +79,10 @@ class GestorArchivoDb:
         print(f"Dump guardado como {self.dump}")
 
     def obtener_dump_mas_actual(self):
-        #   Objeto Path deldirectorio
+        #   Objeto Path del directorio
         dir_path = Path(self.dump)
         #   Busco los *.sql
         archivos = sorted(dir_path.glob("backup_*.sql"))
-
         #   Si no hay archivos devuelvo None
         if archivos:
             archivo_reciente = archivos[-1].resolve()
@@ -116,7 +115,7 @@ class GestorArchivoDb:
                 conexion.close()
                 print("Conexion Cerrada")
 
-    def obtener_dump_menos_nuevos(self):
+    def eliminar_dump_viejos(self):
         #   Objeto Path deldirectorio
         dir_path = Path(self.dump)
         #   Obtengo la ruta absoluta de los dump
