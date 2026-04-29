@@ -115,3 +115,22 @@ class GestorArchivoDb:
             if conexion:
                 conexion.close()
                 print("Conexion Cerrada")
+
+    def obtener_dump_menos_nuevos(self):
+        #   Objeto Path deldirectorio
+        dir_path = Path(self.dump)
+        #   Obtengo la ruta absoluta de los dump
+        archivos = sorted(dir_path.glob("backup_*.sql"))
+        #   De esa lista quito el ultimo
+        paths_antiguos = archivos[:-1]
+        #   Me fijo si hay mucho mas archivos que 1
+        if len(paths_antiguos) > 1:            
+            try:
+                for path in paths_antiguos:
+                    #   Elimino esos archivos
+                    path.unlink()
+                    print("Archivos viejos eliminados")
+            except OSError as e:
+                print(f"Error al eliminar {path}: {e}")
+        else:
+            print("No hay archivos a eliminar")

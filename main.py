@@ -26,13 +26,19 @@ def hacer_restore_dump():
     return db.restaurar_dump_mas_nuevo()
 
 
+def eliminar_dump():
+    db = GestorArchivoDb(ruta_db, ruta_sql, ruta_dump)
+    return db.obtener_dump_menos_nuevos()
+
+
 def main():
     # crear_db()
     # hacer_dump()
     # resultado = obtener_dump_mas_nuevo()
     # print(resultado)
     pass
-    #print(hacer_restore_dump())
+    #print(eliminar_dump())
+    #print(hacer_dump())
 
 
 if __name__ == "__main__":
