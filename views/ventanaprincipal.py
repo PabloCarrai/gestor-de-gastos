@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-from models.funciones_auxiliares import verificar_vacios
+from tkinter import messagebox as ms
+from models.funciones_auxiliares import validar_formulario
+
 
 
 class VentanaPrincipal:
@@ -34,7 +36,8 @@ class VentanaPrincipal:
         self.cb_categoria = ttk.Combobox(
             self.lbf_detalles, values=categorias, state="readonly"
         )
-        self.cb_categoria.set("Elija una opcion")
+        self.cb_categoria.current(0)
+        # self.cb_categoria.set("Elija una opcion")
         self.cb_categoria.grid(column=1, row=2, padx=10, pady=10)
 
         self.btn_agregar = tk.Button(
@@ -48,8 +51,15 @@ class VentanaPrincipal:
         self.btn_cancelar.grid(column=1, row=4, padx=10, pady=10)
 
     def agregar(self):
-        lista_entradas = [self.txt_descripcion, self.txt_monto]
-        verificar_vacios(lista_entradas)
+        if validar_formulario(
+            [self.txt_descripcion, self.txt_monto, self.cb_categoria], self.txt_monto
+        ):
+            print(ruta_db)
+            print(
+                f"Descripcion: {self.txt_descripcion.get()}, Monto: {self.txt_monto.get()}, Categoria: {self.cb_categoria.get()}"
+            )
+        else:
+            ms.showerror("Problemas", "Hay algun dato mal cargado o no valido.")
 
     def salir(self):
         self.ventana_principal.destroy()
