@@ -54,7 +54,6 @@ class VentanaPrincipal:
         if validar_formulario(
             [self.txt_descripcion, self.txt_monto, self.cb_categoria], self.txt_monto
         ):
-            print(ruta_db)
             print(
                 f"Descripcion: {self.txt_descripcion.get()}, Monto: {self.txt_monto.get()}, Categoria: {self.cb_categoria.get()}"
             )

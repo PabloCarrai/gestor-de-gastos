@@ -20,9 +20,12 @@ def validar_entradas_entero(entrada):
     valor = entrada.get()
     try:
         valor_entero = float(valor)
-        return True
+        if type(valor_entero) == float:
+            return True
+        else:
+            return False
     except ValueError:
-        return False
+        print("Error con el valor, no es un numero")
 
 
 def validar_formulario(entradas, entrada):
