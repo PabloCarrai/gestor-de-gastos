@@ -1,3 +1,6 @@
+import tkinter as tk
+
+
 def verificar_entradas_vacias(entradas):
     """
     Recibo una lista de las entradas.
@@ -33,3 +36,8 @@ def validar_formulario(entradas, entrada):
         return True
     else:
         return False
+
+
+def vaciar_entradas(entradas):
+    for entrada in entradas:
+        entrada.delete(0, tk.END)
