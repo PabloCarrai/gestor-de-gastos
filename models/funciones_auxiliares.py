@@ -32,6 +32,11 @@ def validar_entradas_entero(entrada):
 
 
 def validar_formulario(entradas, entrada):
+    """
+    Devuelve true o false.
+    En el caso de que devuelva True es porque
+    los elementos del formularios esta ok
+    """
     if (verificar_entradas_vacias(entradas)) and (validar_entradas_entero(entrada)):
         return True
     else:
@@ -39,5 +44,9 @@ def validar_formulario(entradas, entrada):
 
 
 def vaciar_entradas(entradas):
+    """
+    Esta funcion recibe una lista de entrys
+    y me encargo de vaciarlo
+    """
     for entrada in entradas:
         entrada.delete(0, tk.END)

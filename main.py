@@ -8,6 +8,12 @@ from core.archivo_db_gestor import GestorArchivoDb
 
 from views.ventanaprincipal import VentanaPrincipal
 
+"""
+Todas estas funciones las tengo que mover, 
+son para recrear el archivo de la db. 
+La logica seria que esto este en otro lado. 
+"""
+
 
 def crear_db():
     db = GestorArchivoDb(ruta_db, ruta_sql, ruta_dump)
@@ -36,6 +42,7 @@ def eliminar_dump():
 
 
 def ventana():
+    #   Aca llamo a la ventana principal
     root = tk.Tk()
     ventana = VentanaPrincipal(root)
     root.mainloop()
