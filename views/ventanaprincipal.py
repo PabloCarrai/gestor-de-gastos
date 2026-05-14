@@ -6,6 +6,7 @@ from models.funciones_auxiliares import validar_formulario
 from models.funciones_auxiliares import vaciar_entradas
 from models.funciones_db import GestorDB
 from config import ruta_db
+from views.ventanadb import VentanaSecundaria
 
 
 class VentanaPrincipal:
@@ -73,7 +74,7 @@ class VentanaPrincipal:
 
         #   Boton Db
         self.btn_db = tk.Button(
-            self.ventana_principal, text="Db"
+            self.ventana_principal, text="Db", command=self.mostrar_ventana_db
         )
         self.ventana_principal.bind("<Control-d>", self.mostrar_ocultar_boton_db)
 
@@ -82,6 +83,9 @@ class VentanaPrincipal:
             self.btn_db.grid_forget()
         else:
             self.btn_db.grid(column=0, row=1, padx=10, pady=10)
+
+    def mostrar_ventana_db(self):
+        VentanaSecundaria()
 
     def agregar(self):
         #   Metodo para agregar la info.
