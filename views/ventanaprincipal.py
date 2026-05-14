@@ -71,6 +71,18 @@ class VentanaPrincipal:
         #   Ubicacion del boton Cancelar
         self.btn_cancelar.grid(column=1, row=4, padx=10, pady=10)
 
+        #   Boton Db
+        self.btn_db = tk.Button(
+            self.ventana_principal, text="Db"
+        )
+        self.ventana_principal.bind("<Control-d>", self.mostrar_ocultar_boton_db)
+
+    def mostrar_ocultar_boton_db(self, event=None):
+        if self.btn_db.winfo_ismapped():
+            self.btn_db.grid_forget()
+        else:
+            self.btn_db.grid(column=0, row=1, padx=10, pady=10)
+
     def agregar(self):
         #   Metodo para agregar la info.
         #   Valido con la funcion Validar_formulario
