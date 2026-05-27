@@ -105,13 +105,14 @@ class VentanaPrincipal:
             )
             #   Inserto los datos
             db.insertar()
-            #   Vacio las entradas
-            vaciar_entradas([self.txt_monto, self.txt_descripcion])
             #   Aviso de que se ingreso el registro
             ms.showinfo(
                 "Registro insertado",
                 f"Descripcion: {self.txt_descripcion.get()}, Monto: {self.txt_monto.get()}, Categoria: {self.cb_categoria.get()}",
             )
+            #   Vacio las entradas
+            vaciar_entradas([self.txt_monto, self.txt_descripcion])
+
         else:
             #   Sino muestro que hubo problemas
             ms.showerror("Problemas", "Hay algun dato mal cargado o no valido.")
