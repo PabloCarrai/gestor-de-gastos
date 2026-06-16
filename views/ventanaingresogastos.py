@@ -16,7 +16,7 @@ class VentanaIngresoDatos:
 
     def __init__(self):
         #   Ventana principal
-        self.ventana_principal = tk.Tk()
+        self.ventana_principal = tk.Toplevel()
         #   Titulo de la ventana
         self.ventana_principal.title("Carga de Gastos")
         #   LabelFrame de la ventana
