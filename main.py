@@ -3,10 +3,8 @@ from views.ventanaprincipal import VentanaPrincipal
 
 
 def ventana():
-    #   Aca llamo a la ventana principal
-    root = tk.Tk()
-    ventana = VentanaPrincipal(root)
-    root.mainloop()
+    app = VentanaPrincipal()
+    app.ventana.mainloop()
 
 
 def main():
