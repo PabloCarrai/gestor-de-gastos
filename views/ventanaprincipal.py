@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import ttk
 from views.ventanaingresogastos import VentanaIngresoDatos
+from views.ventanalistargastos import VentanaListarDatos
 
 
 class VentanaPrincipal:
@@ -32,7 +33,7 @@ class VentanaPrincipal:
         self.ventana_ingreso = VentanaIngresoDatos()
 
     def ver_gasto(self):
-        pass
+        self.ventana_listado = VentanaListarDatos()
 
     def salir(self):
         self.ventana.destroy()
