@@ -94,8 +94,9 @@ class VentanaIngresoDatos:
             [self.txt_descripcion, self.txt_monto, self.cb_categoria], self.txt_monto
         ):
             #   Genero una instancia del gesto de la db
-            db = GestorDB(
-                ruta_db,
+            db = GestorDB(ruta_db)
+            #   Inserto los datos
+            db.insertar(
                 "insert into Gastos(descripcion,monto,categoria) values(?,?,?)",
                 (
                     self.txt_descripcion.get(),
@@ -103,8 +104,6 @@ class VentanaIngresoDatos:
                     self.cb_categoria.get(),
                 ),
             )
-            #   Inserto los datos
-            db.insertar()
             #   Aviso de que se ingreso el registro
             ms.showinfo(
                 "Registro insertado",

@@ -10,15 +10,16 @@ class GestorDB:
     los registros de la db para los datos de la aplicacion
     """
 
-    def __init__(self, db_name, consulta, datos):
+    def __init__(self, db_name):
         self.db = db_name
-        self.consulta = consulta
-        self.datos = datos
 
-    def insertar(self):
-        with sqlite3.connect(self.db) as conexion:
-            try:
-                cursor = conexion.execute(self.consulta, self.datos)
-                return cursor.fetchall()
-            except Exception as e:
-                print("Error, volviendo atras: {e}")
+    def insertar(self, sql_insert, datos):
+        try:
+            with sqlite3.connect(self.db) as conexion:
+                cursor = conexion.cursor()
+                cursor.execute(sql_insert, datos)
+                print(f"Datos ingresados {datos}")
+        except sqlite3.Error as e:
+            print(f"Ocurrio un error general de Sqlite: {e}")
+        except Exception as e:
+            print(f"Ocurrio un error inesperado fuera  de la db: {e}")
