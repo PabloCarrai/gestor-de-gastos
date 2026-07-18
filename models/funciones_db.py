@@ -23,3 +23,15 @@ class GestorDB:
             print(f"Ocurrio un error general de Sqlite: {e}")
         except Exception as e:
             print(f"Ocurrio un error inesperado fuera  de la db: {e}")
+
+    def seleccionar(self, sql_select):
+        try:
+            with sqlite3.connect(self.db) as conexion:
+                cursor = conexion.cursor()
+                cursor.execute(sql_select)
+                resultados = cursor.fetchall()
+                return resultados
+        except sqlite3.Error as e:
+            print(f"Ocurrio un error general de Sqlite: {e}")
+        except Exception as e:
+            print(f"Ocurrio un error inesperado fuera  de la db: {e}")

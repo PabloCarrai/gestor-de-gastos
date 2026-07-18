@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox as ms
 from models.funciones_db import GestorDB
+from config import ruta_db
 
 
 class VentanaListarDatos:
@@ -38,7 +39,16 @@ class VentanaListarDatos:
         self.btn_mostrar_datos.grid(column=0, row=5, padx=10, pady=10)
 
     def cargar_registros(self):
-        pass
+        db = GestorDB(ruta_db)
+        resultados = db.seleccionar(
+            "select fecha,descripcion,monto,categoria from Gastos order by id;"
+        )
+        for elemento in self.tv_listado_datos.get_children():
+            self.tv_listado_datos.delete(elemento)
+
+        for fila in resultados:
+            self.tv_listado_datos.insert("", "end", values=fila)
+        # print(resultados)
 
 
 """
