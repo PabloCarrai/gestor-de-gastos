@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox as ms
 from models.funciones_db import GestorDB
-from config import ruta_db
+from config import ruta_db, ruta_consultas
 import os, json
 
 
@@ -40,15 +40,12 @@ class VentanaListarDatos:
         self.btn_mostrar_datos.grid(column=0, row=5, padx=10, pady=10)
 
     def traerme_insert(self):
-        carpeta_view = os.path.dirname(os.path.abspath(__file__))
-        ruta_json = os.path.join(carpeta_view, "..", "database", "consultas.json")
-        ruta_limpia = os.path.abspath(ruta_json)
         try:
-            with open(ruta_limpia, "r", encoding="utf-8") as archivo:
+            with open(ruta_consultas, "r", encoding="utf-8") as archivo:
                 consultas = json.load(archivo)
                 return consultas["consultar_todos_los_gastos"]
         except FileNotFoundError:
-            print(f"No se encontro el archivo en {ruta_limpia}")
+            print(f"No se encontro el archivo en {ruta_consultas}")
 
     def cargar_registros(self):
         consulta_sql = self.traerme_insert()

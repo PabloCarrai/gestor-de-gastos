@@ -14,3 +14,6 @@ ruta_dump = os.path.join(base_dir, "sql", "dump")
 
 #   La ruta de data/categorias.txt
 ruta_categorias = os.path.join(base_dir, "data", "categorias.txt")
+
+#   La ruta de database/consultas.json
+ruta_consultas = os.path.join(base_dir, "database", "consultas.json")
