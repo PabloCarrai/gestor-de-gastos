@@ -39,27 +39,27 @@ class VentanaListarDatos:
         )
         self.btn_mostrar_datos.grid(column=0, row=5, padx=10, pady=10)
 
-    def cargar_registros(self):
+    def traerme_insert(self):
         carpeta_view = os.path.dirname(os.path.abspath(__file__))
         ruta_json = os.path.join(carpeta_view, "..", "database", "consultas.json")
         ruta_limpia = os.path.abspath(ruta_json)
         try:
             with open(ruta_limpia, "r", encoding="utf-8") as archivo:
                 consultas = json.load(archivo)
-                print(consultas["consultar_todos_los_gastos"])
+                return consultas["consultar_todos_los_gastos"]
         except FileNotFoundError:
             print(f"No se encontro el archivo en {ruta_limpia}")
 
-        # db = GestorDB(ruta_db)
-        # resultados = db.seleccionar(
-        #     "select fecha,descripcion,monto,categoria from Gastos order by id;"
-        # )
-        # for elemento in self.tv_listado_datos.get_children():
-        #     self.tv_listado_datos.delete(elemento)
+    def cargar_registros(self):
+        consulta_sql = self.traerme_insert()
+        db = GestorDB(ruta_db)
+        resultados = db.seleccionar(consulta_sql)
 
-        # for fila in resultados:
-        #     self.tv_listado_datos.insert("", "end", values=fila)
-        # # print(resultados)
+        for elemento in self.tv_listado_datos.get_children():
+            self.tv_listado_datos.delete(elemento)
+
+        for fila in resultados:
+            self.tv_listado_datos.insert("", "end", values=fila)
 
 
 """
