@@ -6,6 +6,7 @@ from models.funciones_auxiliares import validar_formulario
 from models.funciones_auxiliares import vaciar_entradas
 from models.funciones_db import GestorDB
 from config import ruta_db
+from config import ruta_categorias
 from views.ventanadb import VentanaSecundaria
 
 
@@ -49,14 +50,14 @@ class VentanaIngresoDatos:
         self.lbl_categoria = tk.Label(self.lbf_detalles, text="Categoria:  ")
         #   Ubicacion para categoria
         self.lbl_categoria.grid(column=0, row=2, padx=10, pady=10)
-        #   Categorias del combobox
-        categorias = ["Otros", "Comida", "Gustos"]
         #   El combobox
         self.cb_categoria = ttk.Combobox(
-            self.lbf_detalles, values=categorias, state="readonly"
+            self.lbf_detalles, values=self.devolver_categorias(), state="readonly"
         )
+        #   Categorias del combobox
+        # self.cb_categoria["values"] =
         #   Seleccion por defecto
-        self.cb_categoria.current(0)
+        # self.cb_categoria.current(0)
         # Su ubicacion
         self.cb_categoria.grid(column=1, row=2, padx=10, pady=10)
         #   Boton Agregar
@@ -77,6 +78,14 @@ class VentanaIngresoDatos:
             self.ventana_principal, text="Db", command=self.mostrar_ventana_db
         )
         self.ventana_principal.bind("<Control-d>", self.mostrar_ocultar_boton_db)
+
+    def devolver_categorias(self):
+        try:
+            with open(ruta_categorias, "r", encoding="utf-8") as archivo:
+                items = [linea.strip() for linea in archivo if linea.strip()]
+                return items
+        except FileNotFoundError:
+            print("Hay problemas con el archivo")
 
     def mostrar_ocultar_boton_db(self, event=None):
         if self.btn_db.winfo_ismapped():
