@@ -2,6 +2,8 @@
 import tkinter as tk
 from tkinter import ttk
 
+from tkcalendar import DateEntry
+
 # from tkinter import messagebox as ms
 # from models.funciones_auxiliares import validar_formulario
 # from models.funciones_auxiliares import vaciar_entradas
@@ -23,3 +25,41 @@ class VentanaIngresoDatosDetallada:
             self.ventana_principal, text="Detalle"
         )
         self.lbf_ventana_principal.grid(row=0, column=0, padx=10, pady=10)
+
+        self.lbl_calendarioinicio = tk.Label(
+            self.lbf_ventana_principal, text="Fecha Inicio:"
+        )
+        self.lbl_calendarioinicio.grid(row=0, column=0, padx=10, pady=10)
+
+        self.dte_calendarioinicio = DateEntry(
+            self.lbf_ventana_principal, date_pattern="dd/mm/yyyy"
+        )
+        self.dte_calendarioinicio.grid(row=0, column=1, padx=10, pady=10)
+
+        self.lbl_calendariofin = tk.Label(self.lbf_ventana_principal, text="Fecha Fin:")
+        self.lbl_calendariofin.grid(row=2, column=0, padx=10, pady=10)
+
+        self.dte_calendariofin = DateEntry(
+            self.lbf_ventana_principal, date_pattern="dd/mm/yyyy"
+        )
+        self.dte_calendariofin.grid(row=2, column=1, padx=10, pady=10)
+
+        self.lbl_categorias = tk.Label(self.lbf_ventana_principal, text="Categoria")
+        self.lbl_categorias.grid(row=3, column=0, padx=10, pady=10)
+
+        categorias = ["Comida", "Lavanderia", "Otros"]
+
+        self.cb_categorias = ttk.Combobox(
+            self.lbf_ventana_principal, values=categorias, state="readonly"
+        )
+        self.cb_categorias.grid(row=3, column=1, padx=10, pady=10)
+
+        self.lbl_descripcion = tk.Label(self.lbf_ventana_principal, text="Descripcion")
+        self.lbl_descripcion.grid(row=4, column=0, padx=10, pady=10)
+
+        self.stv_descripcion = tk.StringVar()
+
+        self.ent_descripcion = tk.Entry(
+            self.lbf_ventana_principal, textvariable=self.stv_descripcion
+        )
+        self.ent_descripcion.grid(row=4, column=1, padx=10, pady=10)
