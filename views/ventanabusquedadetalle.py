@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 
 from tkcalendar import DateEntry
+from config import ruta_categorias
 
 # from tkinter import messagebox as ms
 # from models.funciones_auxiliares import validar_formulario
@@ -47,10 +48,10 @@ class VentanaIngresoDatosDetallada:
         self.lbl_categorias = tk.Label(self.lbf_ventana_principal, text="Categoria")
         self.lbl_categorias.grid(row=3, column=0, padx=10, pady=10)
 
-        categorias = ["Comida", "Lavanderia", "Otros"]
-
         self.cb_categorias = ttk.Combobox(
-            self.lbf_ventana_principal, values=categorias, state="readonly"
+            self.lbf_ventana_principal,
+            values=self.devolver_categorias(),
+            state="readonly",
         )
         self.cb_categorias.grid(row=3, column=1, padx=10, pady=10)
 
@@ -63,3 +64,11 @@ class VentanaIngresoDatosDetallada:
             self.lbf_ventana_principal, textvariable=self.stv_descripcion
         )
         self.ent_descripcion.grid(row=4, column=1, padx=10, pady=10)
+
+    def devolver_categorias(self):
+        try:
+            with open(ruta_categorias, "r", encoding="utf-8") as archivo:
+                items = [linea.strip() for linea in archivo if linea.strip()]
+                return items
+        except FileNotFoundError:
+            print("Hay problemas con el archivo")
