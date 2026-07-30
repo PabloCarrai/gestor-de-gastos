@@ -82,9 +82,13 @@ class VentanaIngresoDatos:
     def devolver_categorias(self):
         try:
             with open(ruta_categorias, "r", encoding="utf-8") as archivo:
-                items = [
-                    linea.strip().title() for linea in archivo if linea.strip().title()
-                ]
+                items = sorted(
+                    [
+                        linea.strip().title()
+                        for linea in archivo
+                        if linea.strip().title()
+                    ]
+                )
                 return items
         except FileNotFoundError:
             print("Hay problemas con el archivo")
