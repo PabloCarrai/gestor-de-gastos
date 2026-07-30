@@ -50,3 +50,11 @@ def vaciar_entradas(entradas):
     """
     for entrada in entradas:
         entrada.delete(0, tk.END)
+
+
+def verificar_opciones_seleccionada(combobox):
+    seleccion = combobox.get()
+    if seleccion:
+        return seleccion
+    else:
+        return False

@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkcalendar import DateEntry
 from config import ruta_categorias
+from models.funciones_auxiliares import verificar_opciones_seleccionada
 
 
 class VentanaIngresoDatosDetallada:
@@ -58,6 +59,12 @@ class VentanaIngresoDatosDetallada:
         )
         self.ent_descripcion.grid(row=4, column=1, padx=10, pady=10)
 
+        #   Boton Buscar
+        self.btn_buscar = tk.Button(
+            self.lbf_ventana_principal, text="Buscar", command=self.buscar_detalle
+        )
+        self.btn_buscar.grid(row=5, column=1, padx=10, pady=10)
+
     def devolver_categorias(self):
         """
         Este metodo arma el contenido del combobox categoria.
@@ -75,3 +82,7 @@ class VentanaIngresoDatosDetallada:
                 return items
         except FileNotFoundError:
             print("Hay problemas con el archivo")
+
+    def buscar_detalle(self):
+        resultado_combo = verificar_opciones_seleccionada(self.cb_categorias)
+        print(resultado_combo)
