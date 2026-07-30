@@ -80,6 +80,10 @@ class VentanaIngresoDatos:
         self.ventana_principal.bind("<Control-d>", self.mostrar_ocultar_boton_db)
 
     def devolver_categorias(self):
+        """
+        Este metodo lee desde un archivo las categorias del combobox.
+        Las devuelve de manera ordenada alfabeticamente.
+        """
         try:
             with open(ruta_categorias, "r", encoding="utf-8") as archivo:
                 items = sorted(
@@ -94,12 +98,18 @@ class VentanaIngresoDatos:
             print("Hay problemas con el archivo")
 
     def mostrar_ocultar_boton_db(self, event=None):
+        """
+        Este metodo me permite ocultar/mostrar el boton que maneja cuestiones de la db
+        """
         if self.btn_db.winfo_ismapped():
             self.btn_db.grid_forget()
         else:
             self.btn_db.grid(column=0, row=1, padx=10, pady=10)
 
     def mostrar_ventana_db(self):
+        """
+        Muestra la ventana secundaria(la de la db)
+        """
         VentanaSecundaria()
 
     def agregar(self):
