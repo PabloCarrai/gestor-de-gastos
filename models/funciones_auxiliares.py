@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkcalendar import DateEntry
 
 
 def verificar_entradas_vacias(entradas):
@@ -58,3 +59,16 @@ def verificar_opciones_seleccionada(combobox):
         return seleccion
     else:
         return False
+
+
+def verificar_descripcion_vacia(descripcion):
+    texto = descripcion.get().strip()
+    if texto == "":
+        return False
+    else:
+        return texto
+
+
+def obtener_fecha(fecha):
+    fecha = fecha.get_date()
+    return fecha

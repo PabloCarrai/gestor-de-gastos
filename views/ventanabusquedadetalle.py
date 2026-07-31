@@ -3,7 +3,11 @@ import tkinter as tk
 from tkinter import ttk
 from tkcalendar import DateEntry
 from config import ruta_categorias
-from models.funciones_auxiliares import verificar_opciones_seleccionada
+from models.funciones_auxiliares import (
+    verificar_opciones_seleccionada,
+    verificar_descripcion_vacia,
+    obtener_fecha,
+)
 
 
 class VentanaIngresoDatosDetallada:
@@ -85,4 +89,10 @@ class VentanaIngresoDatosDetallada:
 
     def buscar_detalle(self):
         resultado_combo = verificar_opciones_seleccionada(self.cb_categorias)
+        resultado_descripcion = verificar_descripcion_vacia(self.ent_descripcion)
+        fecha_inicio = obtener_fecha(self.dte_calendarioinicio)
+        fecha_fin = obtener_fecha(self.dte_calendariofin)
         print(resultado_combo)
+        print(resultado_descripcion)
+        print(fecha_fin)
+        print(fecha_fin)
