@@ -2,7 +2,8 @@
 import tkinter as tk
 from tkinter import ttk
 from tkcalendar import DateEntry
-from config import ruta_categorias
+from config import ruta_categorias, ruta_consultas
+import os, json
 from models.funciones_auxiliares import (
     verificar_opciones_seleccionada,
     verificar_descripcion_vacia,
@@ -87,6 +88,14 @@ class VentanaIngresoDatosDetallada:
         except FileNotFoundError:
             print("Hay problemas con el archivo")
 
+    def traerme_busqueda_fechas(self):
+        try:
+            with open(ruta_consultas, "r", encoding="utf-8") as archivo:
+                consultas = json.load(archivo)
+                return consultas["buscar_gastos_entre_fechas"]
+        except FileNotFoundError:
+            print(f"No se encontro el archivo en {ruta_consultas}")
+
     def buscar_detalle(self):
         resultado_combo = verificar_opciones_seleccionada(self.cb_categorias)
         resultado_descripcion = verificar_descripcion_vacia(self.ent_descripcion)
@@ -94,5 +103,6 @@ class VentanaIngresoDatosDetallada:
         fecha_fin = obtener_fecha(self.dte_calendariofin)
         print(resultado_combo)
         print(resultado_descripcion)
+        print(fecha_inicio)
         print(fecha_fin)
-        print(fecha_fin)
+        print(self.traerme_busqueda_fechas())

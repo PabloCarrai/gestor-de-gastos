@@ -58,13 +58,13 @@ def verificar_opciones_seleccionada(combobox):
     if seleccion:
         return seleccion
     else:
-        return False
+        return "*"
 
 
 def verificar_descripcion_vacia(descripcion):
     texto = descripcion.get().strip()
     if texto == "":
-        return False
+        return "*"
     else:
         return texto
 

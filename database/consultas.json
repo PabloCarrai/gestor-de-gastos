@@ -1,4 +1,5 @@
 {
     "consultar_todos_los_gastos": "select fecha,descripcion,monto,categoria from Gastos order by id;",
-    "insertar_gasto": "select fecha,descripcion,monto,categoria from Gastos order by id;"
+    "insertar_gasto": "select fecha,descripcion,monto,categoria from Gastos order by id;",
+    "buscar_gastos_entre_fechas": "select fecha,descripcion,monto,categoria from Gastos where fecha between ? and ? and categoria=? and descripcion=?;"
 }
