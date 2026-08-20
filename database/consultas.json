@@ -1,5 +1,6 @@
 {
     "consultar_todos_los_gastos": "select fecha,descripcion,monto,categoria from Gastos order by id;",
-    "insertar_gasto": "select fecha,descripcion,monto,categoria from Gastos order by id;",
+    "consultar_gasto_ord_id": "select fecha,descripcion,monto,categoria from Gastos order by id;",
+    "insertar_gasto": "insert into Gastos(descripcion,monto,categoria) values(?,?,?)",
     "buscar_gastos_entre_fechas": "select fecha,descripcion,monto,categoria from Gastos where fecha between ? and ? and categoria=? and descripcion=?;"
 }

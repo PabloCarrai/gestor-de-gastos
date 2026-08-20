@@ -5,8 +5,8 @@ from tkinter import messagebox as ms
 from models.funciones_auxiliares import validar_formulario
 from models.funciones_auxiliares import vaciar_entradas
 from models.funciones_db import GestorDB
-from config import ruta_db
-from config import ruta_categorias
+from config import ruta_categorias, ruta_consultas, ruta_db
+import os, json
 from views.ventanadb import VentanaSecundaria
 
 
@@ -112,6 +112,14 @@ class VentanaIngresoDatos:
         """
         VentanaSecundaria()
 
+    def traerme_insert_producto(self):
+        try:
+            with open(ruta_consultas, "r", encoding="utf-8") as archivo:
+                consultas = json.load(archivo)
+                return consultas["insertar_gasto"]
+        except FileNotFoundError:
+            print(f"No se encontro el archivo en {ruta_consultas}")
+
     def agregar(self):
         #   Metodo para agregar la info.
         #   Valido con la funcion Validar_formulario
@@ -120,9 +128,10 @@ class VentanaIngresoDatos:
         ):
             #   Genero una instancia del gesto de la db
             db = GestorDB(ruta_db)
+            consulta = self.traerme_insert_producto()
             #   Inserto los datos
             db.insertar(
-                "insert into Gastos(descripcion,monto,categoria) values(?,?,?)",
+                consulta,
                 (
                     self.txt_descripcion.get(),
                     self.txt_monto.get(),
